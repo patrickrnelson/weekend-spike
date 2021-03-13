@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -35,12 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const handleLogin = () => {
-  console.log('handleLogin');
-}
-
 function WelcomePage() {
+  const history = useHistory();
   const classes = useStyles();
+
+  const handleLogin = () => {
+    console.log('handleLogin');
+    history.push('/welcome')
+  }
   
   return (
 
