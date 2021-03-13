@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 
+const useStyles = makeStyles({
+  list: {
+    width: "225px",
+  }
+});
+
 function WelcomePage() {
+  const classes = useStyles();
   const [drawer, setDrawer] = useState(false);
 
-  const toggleDrawer = () => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setDrawer(true);
+  const toggleDrawer = () => {
+    setDrawer(!drawer);
   };
 
-  const list = () => {
+  const list = (
     <div
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}>
-      <ol>
-        <li>Recommendations</li>
-        <li>My Beers</li>
-        <li>Want to Try</li>
-      </ol>
+      className={classes.list}
+      onClick={toggleDrawer}
+      onKeyDown={toggleDrawer}
+      role="presentation">
+        
+        <List>
+          <ListItem>Recommendations</ListItem>
+          <ListItem>My Beers</ListItem>
+          <ListItem>Want to Try</ListItem>
+        </List>
     </div>
-  }
+  )
 
   return (
     <>
-    <Button onClick={toggleDrawer(true)}>
+    <IconButton onClick={toggleDrawer}>
       <MenuIcon fontSize="large"/>
-    </Button>
-    <Drawer anchor="left" open={drawer} onClose={toggleDrawer(false)}>
+    </IconButton>
+    <Drawer anchor="left" open={drawer} onClose={toggleDrawer}>
       {list}
     </Drawer>
     <Box mt={3}>
