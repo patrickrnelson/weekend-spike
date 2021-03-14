@@ -7,6 +7,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles({
   list: {
@@ -17,6 +19,19 @@ const useStyles = makeStyles({
 function WelcomePage() {
   const classes = useStyles();
   const [drawer, setDrawer] = useState(false);
+
+  const breweries = [ 
+    {name: 'Pryes'},
+    {name: 'Indeed'},
+    {name: 'Modist'},
+    {name: 'Fulton'},
+    {name: 'Castle Danger'},
+    {name: 'Inbound'},
+    {name: 'Dangerous Man'},
+    {name: 'Falling Knife'},
+    {name: 'Able'},
+    {name: 'Bauhaus'},
+  ];
 
   const toggleDrawer = () => {
     setDrawer(!drawer);
@@ -45,9 +60,16 @@ function WelcomePage() {
     <Drawer anchor="left" open={drawer} onClose={toggleDrawer}>
       {list}
     </Drawer>
-    <Box mt={3}>
+    <Box mt={3} mb={3}>
       <p>Welcome!</p>
     </Box>
+    <Autocomplete
+      id="combo-box-demo"
+      options={breweries}
+      getOptionLabel={(option) => option.name}
+      style={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Brewery" variant="outlined" />}
+    />
     </>
   )
 }
